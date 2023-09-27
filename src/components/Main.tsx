@@ -1,8 +1,10 @@
 // Import necessary libraries and components
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Card, CardContent, CardMedia, Typography, Container, Link } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Container, Link } from '@mui/material';
+import Button from './Button'; 
 
+// Function definition without React.FC
 const Main = () => {
   // Define state for storing the fetched image data
   const [image, setImage] = useState<any>(null);
@@ -42,8 +44,7 @@ const Main = () => {
             <Typography variant="h5">{image.title}</Typography>
           </CardContent>
           
-          {/* Button to fetch a new image */}
-          <Button variant="contained" color="primary" onClick={fetchImage}>Next</Button>
+          <Button label="Next" color="primary" onClick={fetchImage} />
         </Card>
       )}
       
