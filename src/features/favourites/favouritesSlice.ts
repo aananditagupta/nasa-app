@@ -6,7 +6,8 @@ interface Favourite {
   url: string;
 }
 
-const initialState: Favourite[] = [];
+const savedFavourites = localStorage.getItem('favourites')
+const initialState: Favourite[] = savedFavourites ? JSON.parse(savedFavourites) : [];
 
 const favouritesSlice = createSlice({
   name: 'favourites',
@@ -14,6 +15,7 @@ const favouritesSlice = createSlice({
   reducers: {
     addFavourite: (state, action: PayloadAction<Favourite>) => {
       state.push(action.payload);
+      localStorage.setItem('favourites', JSON.stringify(state))
     }
   }
 });

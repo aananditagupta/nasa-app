@@ -10,7 +10,8 @@ export const Main = () => {
 
   const fetchImage = async () => {
     const response = await axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=1');
-    setImage(response.data);
+    // check for data 
+    setImage(response.data[0]);
   };
 
   React.useEffect(() => {
