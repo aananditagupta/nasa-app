@@ -1,14 +1,18 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const Favourites = () => {
+  const favourites = useSelector((state: RootState) => state.favourites.images);
+
   return (
     <div>
-      {/* Placeholder title */}
-      <Typography variant="h4">Favourites</Typography>
-      
-      {/* Placeholder message */}
-      <Typography>Feature coming soon!</Typography>
+      {favourites.map((image, index) => (
+        <div key={index}>
+          <img src={image.url} alt={image.title} style={{ width: '100%' }} />
+          <p>{image.title}</p>
+        </div>
+      ))}
     </div>
   );
 };

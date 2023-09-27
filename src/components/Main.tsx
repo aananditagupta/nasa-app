@@ -1,21 +1,23 @@
 // Import necessary libraries and components
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, CardContent, CardMedia, Typography, Container, Link } from '@mui/material';
 import Button from './Button'; 
+import { useDispatch } from 'react-redux';
+import { addFavourite } from '../store/actions';
 
-// Function definition without React.FC
 const Main = () => {
   // Define state for storing the fetched image data
   const [image, setImage] = useState<any>(null);
+  const dispatch = useDispatch();
 
   // Function to fetch the Astronomy Picture of the Day from NASA's API
   const fetchImage = async () => {
     try {
-      const response = await axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+      const response = await axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=1');
       
-      // Set the fetched data to the state
-      setImage(response.data);
+      // Set the fetched data to the state -> since this is always going to return an array, [0] will ensure that only the first image is stored
+      setImage(response.data[0]);
     } catch (error) {
       // Log any errors that occur during the fetch operation
       console.error("Error fetching the image:", error);
@@ -35,7 +37,8 @@ const Main = () => {
           {/* Display the fetched image */}
           <CardMedia
             component="img"
-            height="140"
+            height="75%"
+            width="100%"
             image={image.url}
             alt={image.title}
           />
@@ -45,6 +48,7 @@ const Main = () => {
           </CardContent>
           
           <Button label="Next" color="primary" onClick={fetchImage} />
+          <Button onClick={() => dispatch(addFavourite({ title: image.title, url: image.url }))} label="Save"></Button>
         </Card>
       )}
       
