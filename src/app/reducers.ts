@@ -14,6 +14,7 @@ const initialState: FavouritesState = {
 };
 
 export function favouritesReducer(state = initialState, action: any): FavouritesState {
+    console.log("favouritesReducer called");
   switch (action.type) {
     case ADD_FAVOURITE:
       return {

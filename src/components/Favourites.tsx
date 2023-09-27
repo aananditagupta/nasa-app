@@ -1,20 +1,24 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
-const Favourites = () => {
-  const favourites = useSelector((state: RootState) => state.favourites.images);
+export const Favourites = () => {
+  const favourites = useSelector((state: any) => state.favourites);
 
   return (
     <div>
-      {favourites.map((image, index) => (
-        <div key={index}>
-          <img src={image.url} alt={image.title} style={{ width: '100%' }} />
-          <p>{image.title}</p>
-        </div>
+      {favourites.map((favourite: any, index: number) => (
+        <Card key={index}>
+          <CardMedia
+            component="img"
+            height="140"
+            image={favourite.url}
+            alt={favourite.title}
+          />
+          <CardContent>
+            <Typography variant="h5">{favourite.title}</Typography>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
 };
-
-export default Favourites;
