@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {Main} from './components/Main';
-import {Favourites} from './components/Favourites';
+import Favourites from './components/Favourites';
 
 const App = () => {
   return (
